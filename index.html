@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101510">
+<title>Abdullah AI</title>
+<style>
+:root{color-scheme:dark;--bg:#101510;--panel:#151d17;--panel2:#1b251e;--line:#29372d;--text:#edf5ee;--muted:#9aa99d;--green:#20c878;--green2:#159b5b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;height:100vh;overflow:hidden}
+.app{height:100vh;display:grid;grid-template-columns:270px 1fr}.sidebar{background:#0c120e;border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;padding:5px 7px 15px}.logo{width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#25db83,#087a49);display:grid;place-items:center;box-shadow:0 6px 22px #13a96335}.logo svg{width:24px;height:24px}.brand strong{font-size:17px;letter-spacing:-.4px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.5px}
+.newchat{border:1px solid #315440;background:#14251a;color:#eafff0;border-radius:12px;padding:12px;text-align:left;font:inherit;cursor:pointer;display:flex;gap:10px;align-items:center}.newchat:hover{background:#1b3424}.side-label{color:#728177;font-size:11px;text-transform:uppercase;letter-spacing:1.3px;padding:0 8px}.history{display:flex;flex-direction:column;gap:5px}.history button{background:none;border:0;color:#bdc9bf;text-align:left;padding:9px 10px;border-radius:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.history button:hover{background:var(--panel2)}.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding:14px 5px 3px;color:var(--muted);font-size:12px}
+.main{min-width:0;display:flex;flex-direction:column;position:relative}.topbar{height:66px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px}.model{color:#dce9df;font-weight:600}.model span{color:var(--green);font-size:11px;margin-left:7px}.top-actions{display:flex;gap:9px}.top-actions button{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:8px 11px;border-radius:9px;cursor:pointer}
+.content{flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;padding:38px 22px 20px}.welcome{width:min(760px,100%);margin:auto 0;text-align:center}.hero-logo{width:62px;height:62px;border-radius:21px;margin:0 auto 19px;background:linear-gradient(145deg,#25db83,#087a49);display:grid;place-items:center;box-shadow:0 12px 45px #13a96325}.hero-logo svg{width:38px}.welcome h1{font-size:clamp(29px,5vw,43px);letter-spacing:-1.7px;margin:0 0 9px}.welcome h1 em{font-style:normal;color:var(--green)}.welcome p{color:var(--muted);margin:0 0 30px}.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;text-align:left}.suggestion{background:var(--panel);border:1px solid var(--line);padding:15px 16px;border-radius:14px;color:var(--text);cursor:pointer}.suggestion:hover{border-color:#39734f;background:#19251d}.suggestion b{display:block;font-size:14px;margin-bottom:3px}.suggestion small{color:var(--muted)}
+.messages{width:min(780px,100%);display:flex;flex-direction:column;gap:22px;padding:8px 0 22px}.message{display:flex;gap:12px;align-items:flex-start}.avatar{flex:0 0 30px;height:30px;border-radius:10px;background:#1c2d21;color:var(--green);display:grid;place-items:center;font-size:12px;font-weight:800}.message.user .avatar{background:#26332a;color:#d9e7dc}.bubble{white-space:pre-wrap;overflow-wrap:anywhere;padding:3px 0;max-width:100%}.message.user .bubble{background:#1a241d;border:1px solid var(--line);padding:11px 14px;border-radius:14px}.composer-wrap{padding:12px 22px 20px;background:linear-gradient(transparent,var(--bg) 25%)}.composer{width:min(780px,100%);margin:auto;background:#18221b;border:1px solid #34483a;border-radius:17px;padding:10px 12px;box-shadow:0 12px 40px #0003}.composer textarea{width:100%;resize:none;max-height:160px;min-height:48px;border:0;outline:0;background:transparent;color:var(--text);font:inherit;padding:7px 8px}.composer-bottom{display:flex;justify-content:space-between;align-items:center;padding:3px 3px 1px 8px;color:#829187;font-size:11px}.send{width:36px;height:36px;border:0;border-radius:11px;background:var(--green);color:#062011;font-size:19px;font-weight:800;cursor:pointer}.send:disabled{opacity:.45;cursor:not-allowed}.disclaimer{text-align:center;color:#758278;font-size:11px;margin:9px auto 0;max-width:780px}.hidden{display:none!important}
+@media(max-width:700px){.app{grid-template-columns:1fr}.sidebar{display:none}.topbar{height:58px;padding:0 15px}.content{padding:25px 16px 12px}.composer-wrap{padding:10px 12px 14px}.suggestions{grid-template-columns:1fr}.welcome{margin:auto 0}.top-actions button{padding:7px 9px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo"><svg viewBox="0 0 40 40" fill="none" stroke="#062b18" stroke-width="2.7" stroke-linecap="round"><path d="M20 5 30 11v12L20 29 10 23V11L20 5Z"/><path d="m10 11 10 6 10-6M20 17v12M5 17l5-3m20 0 5 3M10 29l10 6 10-6"/></svg></div><div><strong>Abdullah AI</strong><small>YOUR AI WORKSPACE</small></div></div>
+  <button class="newchat" id="newChat"><span>＋</span> New chat</button>
+  <div class="side-label">Recent</div><div class="history" id="history"><button>No chats yet</button></div>
+  <div class="side-bottom">ABDULLAH TECHNOLOGIES<br><span style="color:#617168">Early preview · v0.1</span></div>
+</aside>
+<main class="main">
+  <header class="topbar"><div class="model">Abdullah AI <span>PREVIEW</span></div><div class="top-actions"><button id="language">العربية</button><button id="clear">Clear chat</button></div></header>
+  <section class="content" id="content">
+    <div class="welcome" id="welcome">
+      <div class="hero-logo"><svg viewBox="0 0 40 40" fill="none" stroke="#062b18" stroke-width="2.7" stroke-linecap="round"><path d="M20 5 30 11v12L20 29 10 23V11L20 5Z"/><path d="m10 11 10 6 10-6M20 17v12M5 17l5-3m20 0 5 3M10 29l10 6 10-6"/></svg></div>
+      <h1>What can I help you <em>with?</em></h1><p>Your ideas start here. Ask, learn, create, and explore.</p>
+      <div class="suggestions">
+        <button class="suggestion" data-prompt="Explain a difficult school topic in a simple way"><b>📚 Help me learn</b><small>Understand school topics step by step</small></button>
+        <button class="suggestion" data-prompt="Help me come up with a creative idea"><b>💡 Brainstorm ideas</b><small>Explore ideas and make a plan</small></button>
+        <button class="suggestion" data-prompt="Help me write a clear paragraph"><b>✍️ Write something</b><small>Draft, improve, and organize text</small></button>
+        <button class="suggestion" data-prompt="Explain how a search engine works"><b>🔎 Explore a question</b><small>Get a clear, simple explanation</small></button>
+      </div>
+    </div>
+    <div class="messages hidden" id="messages"></div>
+  </section>
+  <div class="composer-wrap"><div class="composer"><textarea id="prompt" rows="1" placeholder="Message Abdullah AI..."></textarea><div class="composer-bottom"><span>↵ Enter to send · Shift + Enter for a new line</span><button class="send" id="send" aria-label="Send">↑</button></div></div><div class="disclaimer" id="disclaimer">Preview version: replies are sample responses. Connect an AI service to enable live AI answers.</div></div>
+</main>
+</div>
+<script>
+const $=s=>document.querySelector(s);let chats=[],active=[];
+const messages=$('#messages'),welcome=$('#welcome'),input=$('#prompt');
+function showChat(){welcome.classList.add('hidden');messages.classList.remove('hidden')}
+function addMessage(role,text){showChat();const row=document.createElement('div');row.className='message '+role;const avatar=document.createElement('div');avatar.className='avatar';avatar.textContent=role==='user'?'YOU':'A';const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=text;row.append(avatar,bubble);messages.append(row);$('#content').scrollTop=$('#content').scrollHeight}
+function replyFor(q){const s=q.toLowerCase();if(/hello|hi\b|مرحبا|السلام/.test(s))return 'Hello! Welcome to Abdullah AI. I can help you learn, write, plan, and explore ideas.\n\nThis is an early preview, so my replies are examples until a live AI model is connected.';if(/study|school|درس|رياضيات|science|homework|واجب/.test(s))return 'Let’s make learning easier!\n\n1. Tell me the topic you are studying.\n2. We will break it into small ideas.\n3. I will explain each idea with a simple example.\n4. Then we can practise together.\n\nPreview note: connect a live AI service for personalised answers.';if(/write|paragraph|email|اكتب|كتابة/.test(s))return 'I can help you plan and improve your writing. Start with the main idea, add two or three supporting points, then finish with a clear conclusion.\n\nShare the topic and the style you want when live AI is connected.';return 'Thanks for your message! Abdullah AI is being built. This preview can demonstrate the chat interface, but it does not yet generate live AI answers.\n\nNext development step: connect a secure AI backend so your questions receive real model-generated responses.'}
+function send(){const q=input.value.trim();if(!q)return;addMessage('user',q);active.push({role:'user',content:q});input.value='';input.style.height='auto';$('#send').disabled=true;setTimeout(()=>{const a=replyFor(q);addMessage('assistant',a);active.push({role:'assistant',content:a});$('#send').disabled=false;saveChat(q)},350)}
+function saveChat(q){if(!active.length)return;const title=q.length>28?q.slice(0,28)+'…':q;const item={title,messages:[...active]};const old=chats.findIndex(c=>c.id===window.chatId);if(old>=0)chats[old]=item;else{item.id=Date.now();window.chatId=item.id;chats.unshift(item)}renderHistory()}
+function renderHistory(){const h=$('#history');h.innerHTML='';if(!chats.length){const b=document.createElement('button');b.textContent='No chats yet';h.append(b);return}chats.forEach(c=>{const b=document.createElement('button');b.textContent='▢  '+c.title;b.onclick=()=>{messages.innerHTML='';active=[...c.messages];window.chatId=c.id;active.forEach(m=>addMessage(m.role,m.content))};h.append(b)})}
+function fresh(){active=[];window.chatId=null;messages.innerHTML='';messages.classList.add('hidden');welcome.classList.remove('hidden');input.value=''}
+$('#send').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(input.scrollHeight,160)+'px';$('#send').disabled=!input.value.trim()});$('#newChat').onclick=fresh;$('#clear').onclick=fresh;document.querySelectorAll('.suggestion').forEach(b=>b.onclick=()=>{input.value=b.dataset.prompt;send()});
+let arabic=false;$('#language').onclick=()=>{arabic=!arabic;document.documentElement.lang=arabic?'ar':'en';document.documentElement.dir=arabic?'rtl':'ltr';$('#language').textContent=arabic?'English':'العربية';$('.welcome h1').innerHTML=arabic?'كيف يمكنني مساعدتك <em>اليوم؟</em>':'What can I help you <em>with?</em>';$('.welcome p').textContent=arabic?'ابدأ أفكارك هنا. اسأل وتعلّم وأنشئ واكتشف.':'Your ideas start here. Ask, learn, create, and explore.';input.placeholder=arabic?'اكتب رسالتك إلى عبدالله AI...':'Message Abdullah AI...';$('#disclaimer').textContent=arabic?'هذه نسخة تجريبية: الردود أمثلة فقط. نحتاج إلى ربط خدمة ذكاء اصطناعي لتفعيل الإجابات الحقيقية.':'Preview version: replies are sample responses. Connect an AI service to enable live AI answers.'};
+$('#send').disabled=true;
+</script>
+</body></html>
