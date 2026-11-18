@@ -37,7 +37,7 @@ module.exports = async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: process.env.OPENAI_MODEL || "gpt-6-astra",
+        model: process.env.OPENAI_MODEL || "gpt-6-luna",
         instructions: "You are Abdullah AI, a helpful, clear, friendly assistant created by ABDULLAH TECHNOLOGIES. Reply in the language the user uses. Explain school topics patiently and age-appropriately. Be honest when uncertain. Do not claim to have capabilities or access you do not have.",
         input: safeMessages.map(m => ({ role: m.role, content: m.content })),
         max_output_tokens: 900
