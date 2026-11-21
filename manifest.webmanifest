@@ -1,0 +1,19 @@
+{
+  "name": "Abdullah AI",
+  "short_name": "Abdullah AI",
+  "description": "A smarter space for learning, writing, and ideas.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08130f",
+  "theme_color": "#08130f",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

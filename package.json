@@ -1,0 +1,12 @@
+{
+  "name": "abdullah-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Abdullah AI web application",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
