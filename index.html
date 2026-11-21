@@ -193,7 +193,7 @@
         </form>
         <div class="composer-hint"><span data-ar="Enter للإرسال · Shift + Enter لسطر جديد" data-en="Enter to send · Shift + Enter for a new line">Enter للإرسال · Shift + Enter لسطر جديد</span><span data-ar="حتى 3,500 حرف لكل رسالة" data-en="Up to 3,500 characters per message">حتى 3,500 حرف لكل رسالة</span></div>
       </div>
-      <p class="disclaimer" data-ar="قد يخطئ الذكاء الاصطناعي؛ راجع المعلومات المهمة. لا تشارك كلمات المرور أو البيانات الحساسة." data-en="AI can make mistakes; verify important information. Never share passwords or sensitive information.">قد يخطئ الذكاء الاصطناعي؛ راجع المعلومات المهمة. <strong>لا تشارك كلمات المرور أو البيانات الحساسة.</strong></p>
+      <p class="disclaimer" id="disclaimer" data-ar="قد يخطئ الذكاء الاصطناعي؛ راجع المعلومات المهمة. لا تشارك كلمات المرور أو البيانات الحساسة." data-en="AI can make mistakes; verify important information. Never share passwords or sensitive information.">قد يخطئ الذكاء الاصطناعي؛ راجع المعلومات المهمة. <strong>لا تشارك كلمات المرور أو البيانات الحساسة.</strong></p>
     </section>
   </main>
 </div>
@@ -432,6 +432,12 @@
   }
 
   async function sendMessage(text) {
+    if (location.hostname.endsWith("github.io")) {
+      showToast(language === "ar"
+        ? "هذه نسخة واجهة على GitHub Pages فقط. نحتاج نشر خادم الذكاء الاصطناعي على استضافة تدعم API قبل تفعيل المحادثة."
+        : "This is the GitHub Pages interface only. Deploy the AI API to a serverless host before enabling live chat.");
+      return;
+    }
     if (isSending) return;
     const message = text.trim();
     if (!message) return;
@@ -566,6 +572,11 @@
   });
 
   setLanguage("ar");
+  if (location.hostname.endsWith("github.io")) {
+    $("#disclaimer").textContent = language === "ar"
+      ? "نسخة عرض على GitHub Pages: واجهة التطبيق تعمل، لكن خادم الذكاء الاصطناعي غير منشور هنا بعد."
+      : "GitHub Pages preview: the interface is live, but the AI server is not deployed here yet.";
+  }
   renderHistory();
   renderConversation();
 })();
